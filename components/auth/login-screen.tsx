@@ -228,7 +228,7 @@ export function LoginScreen({ onNavigate }: LoginScreenProps) {
                     ) : (
                       <div className="flex items-center gap-2">
                         <Zap size={20} />
-                        Sign In to MessMaster
+                        Sign In to MessHub
                       </div>
                     )}
                   </Button>
