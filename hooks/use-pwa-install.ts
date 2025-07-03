@@ -11,6 +11,13 @@ interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
 }
 
+declare global {
+  interface WindowEventMap {
+    beforeinstallprompt: BeforeInstallPromptEvent;
+    appinstalled: Event;
+  }
+}
+
 export interface PWAInstallState {
   canInstall: boolean;
   isInstalled: boolean;
@@ -22,7 +29,7 @@ export interface PWAInstallState {
 }
 
 export interface PWAInstallActions {
-  install: () => Promise<void>;
+  install: () => Promise<boolean>;
   dismissPrompt: () => void;
   resetPrompt: () => void;
 }
@@ -40,135 +47,69 @@ export function usePWAInstall(): PWAInstallState & PWAInstallActions {
   const [isAndroid, setIsAndroid] = useState(false);
 
   useEffect(() => {
-    // Check if app is already installed/running as PWA
-    const checkStandalone = () => {
-      const standalone = window.matchMedia('(display-mode: standalone)').matches ||
+    // Check if app is already installed
+    const checkInstallation = () => {
+      const isStandaloneMode = 
+        window.matchMedia('(display-mode: standalone)').matches ||
         (window.navigator as any).standalone ||
         document.referrer.includes('android-app://');
-      setIsStandalone(standalone);
-      if (standalone) {
-        setIsInstalled(true);
-      }
-    };
-
-    // Detect device type
-    const detectDevice = () => {
-      const userAgent = window.navigator.userAgent.toLowerCase();
-      setIsIOS(/iphone|ipad|ipod/.test(userAgent));
-      setIsAndroid(/android/.test(userAgent));
-    };
-
-    // Check if prompt was previously dismissed
-    const checkDismissed = () => {
-      const dismissed = localStorage.getItem(STORAGE_KEY);
-      if (!dismissed) return false;
       
-      const dismissedTime = parseInt(dismissed, 10);
-      const daysSinceDismissed = (Date.now() - dismissedTime) / (1000 * 60 * 60 * 24);
+      setIsStandalone(isStandaloneMode);
+      setIsInstalled(isStandaloneMode);
       
-      // Show prompt again after 1 day for testing
-      return daysSinceDismissed < 1;
+      console.log('[PWA] Standalone mode:', isStandaloneMode);
     };
 
-    checkStandalone();
-    detectDevice();
+    checkInstallation();
 
-    // Don't show prompt if already installed
-    if (isStandalone) {
-      return;
-    }
-
-    // Handle beforeinstallprompt event
-    const handleBeforeInstallPrompt = (e: Event) => {
-      console.log('beforeinstallprompt event fired');
+    const handleBeforeInstallPrompt = (e: BeforeInstallPromptEvent) => {
+      console.log('[PWA] Before install prompt triggered');
       e.preventDefault();
-      const promptEvent = e as BeforeInstallPromptEvent;
-      setDeferredPrompt(promptEvent);
-      setCanInstall(true);
-      
-      // Show prompt after delay if not recently dismissed
-      if (!checkDismissed()) {
-        setTimeout(() => {
-          console.log('Showing install prompt');
-          setShowPrompt(true);
-        }, INSTALL_DELAY);
-      }
+      setDeferredPrompt(e);
     };
 
-    // Handle successful app installation
     const handleAppInstalled = () => {
-      console.log('App installed successfully');
-      setIsInstalled(true);
-      setCanInstall(false);
-      setShowPrompt(false);
+      console.log('[PWA] App installed successfully');
       setDeferredPrompt(null);
-      
-      // Track installation
-      if (typeof window !== 'undefined' && 'gtag' in window) {
-        (window as any).gtag('event', 'pwa_install', {
-          event_category: 'engagement',
-          event_label: 'pwa_installed'
-        });
-      }
+      setIsInstalled(true);
+      setIsStandalone(true);
     };
 
-    // Add event listeners
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    window.addEventListener('appinstalled', handleAppInstalled);
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    window.addEventListener("appinstalled", handleAppInstalled);
 
-    // For testing - show prompt button on desktop even without beforeinstallprompt
-    const timer = setTimeout(() => {
-      if (!isStandalone && !canInstall && !checkDismissed()) {
-        console.log('Showing fallback install prompt');
-        setShowPrompt(true);
-      }
-    }, INSTALL_DELAY);
+    // Listen for display mode changes
+    const mediaQuery = window.matchMedia('(display-mode: standalone)');
+    const handleDisplayModeChange = (e: MediaQueryListEvent) => {
+      console.log('[PWA] Display mode changed:', e.matches ? 'standalone' : 'browser');
+      setIsStandalone(e.matches);
+    };
+    mediaQuery.addEventListener('change', handleDisplayModeChange);
 
     return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-      window.removeEventListener('appinstalled', handleAppInstalled);
-      clearTimeout(timer);
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.removeEventListener("appinstalled", handleAppInstalled);
+      mediaQuery.removeEventListener('change', handleDisplayModeChange);
     };
-  }, [isStandalone, canInstall]);
+  }, []);
 
-  const install = async (): Promise<void> => {
-    if (!deferredPrompt) {
-      console.log('No deferred prompt available');
-      return;
-    }
+  const install = async () => {
+    console.log('[PWA] Install requested, prompt available:', !!deferredPrompt);
+    if (!deferredPrompt) return false;
 
     try {
-      console.log('Triggering install prompt');
       await deferredPrompt.prompt();
-      const choiceResult = await deferredPrompt.userChoice;
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log('[PWA] User choice:', outcome);
       
-      console.log('User choice:', choiceResult.outcome);
-      
-      if (choiceResult.outcome === 'accepted') {
-        setIsInstalled(true);
-        setShowPrompt(false);
-        
-        // Track successful installation
-        if (typeof window !== 'undefined' && 'gtag' in window) {
-          (window as any).gtag('event', 'pwa_install_accepted', {
-            event_category: 'engagement',
-            event_label: 'install_prompt_accepted'
-          });
-        }
-      } else {
-        // Track dismissed installation
-        if (typeof window !== 'undefined' && 'gtag' in window) {
-          (window as any).gtag('event', 'pwa_install_dismissed', {
-            event_category: 'engagement',
-            event_label: 'install_prompt_dismissed'
-          });
-        }
+      if (outcome === "accepted") {
+        setDeferredPrompt(null);
+        return true;
       }
-      
-      setDeferredPrompt(null);
-      setCanInstall(false);
+      return false;
     } catch (error) {
-      console.error('Error during PWA installation:', error);
+      console.error("[PWA] Error installing:", error);
+      return false;
     }
   };
 
@@ -191,7 +132,7 @@ export function usePWAInstall(): PWAInstallState & PWAInstallActions {
   };
 
   return {
-    canInstall,
+    canInstall: !!deferredPrompt && !isInstalled && !isStandalone,
     isInstalled,
     isStandalone,
     isIOS,
