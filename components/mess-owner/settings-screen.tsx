@@ -98,6 +98,10 @@ export function SettingsScreen() {
             <User className="mr-2 h-4 w-4" />
             Profile
           </TabsTrigger>
+          <TabsTrigger value="mess-details" className="flex items-center">
+            <Building className="mr-2 h-4 w-4" />
+            Mess Details
+          </TabsTrigger>
           <TabsTrigger value="notifications" className="flex items-center">
             <Bell className="mr-2 h-4 w-4" />
             Notifications
@@ -105,10 +109,6 @@ export function SettingsScreen() {
           <TabsTrigger value="security" className="flex items-center">
             <Lock className="mr-2 h-4 w-4" />
             Security
-          </TabsTrigger>
-          <TabsTrigger value="mess-details" className="flex items-center">
-            <Building className="mr-2 h-4 w-4" />
-            Mess Details
           </TabsTrigger>
         </TabsList>
 

@@ -96,10 +96,11 @@ export function MessOwnerDashboard() {
   }
 
   const mobileNavItems = [
-    { id: "dashboard", icon: LayoutDashboard, label: "Home" },
-    { id: "meals", icon: UtensilsCrossed, label: "Meals" },
-    { id: "users", icon: Users, label: "Users" },
-    { id: "settings", icon: Settings, label: "Profile" },
+    { id: "dashboard", icon: LayoutDashboard, label: "Dashboard" },
+    { id: "meals", icon: UtensilsCrossed, label: "Meal" },
+    { id: "users", icon: Users, label: "User" },
+    { id: "billing", icon: Receipt, label: "Billing" },
+    { id: "settings", icon: Settings, label: "Settings" },
   ]
 
   return (
@@ -166,7 +167,7 @@ export function MessOwnerDashboard() {
       {/* Mobile Bottom Navigation */}
       {isMobile && (
         <div className="fixed bottom-0 left-0 right-0 z-40 bg-card/95 backdrop-blur-lg border-t border-border">
-          <div className="grid grid-cols-4 gap-1 p-2">
+          <div className="grid grid-cols-5 gap-1 p-2">
             {mobileNavItems.map((item) => {
               const Icon = item.icon;
               return (
@@ -174,14 +175,16 @@ export function MessOwnerDashboard() {
                   key={item.id}
                   variant="ghost"
                   onClick={() => setActiveSection(item.id as MessOwnerSection)}
-                  className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all duration-300 ${
+                  className={`relative flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 ${
                     activeSection === item.id
-                      ? "bg-primary-blue/10 text-primary-blue"
+                      ? "bg-primary-blue/10 text-primary-blue min-w-[100px]"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   <Icon size={20} />
-                  <span className="text-xs font-medium">{item.label}</span>
+                  {activeSection === item.id && (
+                    <span className="text-xs font-medium mt-1">{item.label}</span>
+                  )}
                 </Button>
               );
             })}
