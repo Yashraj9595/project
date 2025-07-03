@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-import { ThemeProvider } from 'next-themes';
+import { ThemeProvider } from '@/components/theme-context';
 import { AuthProvider } from '@/contexts/auth-context';
 import { InstallPrompt } from '@/components/install-prompt';
 import { Toaster } from '@/components/ui/sonner';
@@ -9,9 +9,15 @@ import { Toaster } from '@/components/ui/sonner';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'MessHub - Your Kitchen Management Platform',
-  description: 'Manage your mess/kitchen operations efficiently with MessHub',
+  title: 'MessHub - Kitchen Management Platform',
+  description: 'Efficient kitchen and mess management system',
   manifest: '/manifest.json',
+  icons: {
+    apple: [
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -60,13 +66,13 @@ export default function RootLayout({
         <link rel="mask-icon" href="/icon-512x512.png" color="#ffffff" />
       </head>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <AuthProvider>
+        <AuthProvider>
+          <ThemeProvider>
             <InstallPrompt />
             {children}
             <Toaster />
-          </AuthProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
