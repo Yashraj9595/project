@@ -9,25 +9,25 @@ import { Toaster } from '@/components/ui/sonner';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'MessMaster - Your Kitchen Management Platform',
-  description: 'Manage your mess/kitchen operations efficiently with MessMaster',
+  title: 'MessHub - Your Kitchen Management Platform',
+  description: 'Manage your mess/kitchen operations efficiently with MessHub',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'MessMaster',
+    title: 'MessHub',
   },
   formatDetection: {
     telephone: false,
   },
-  applicationName: 'MessMaster',
+  applicationName: 'MessHub',
   generator: 'Next.js',
   keywords: ['mess management', 'kitchen management', 'food service', 'PWA'],
-  authors: [{ name: 'MessMaster Team' }],
-  creator: 'MessMaster Team',
-  publisher: 'MessMaster',
+  authors: [{ name: 'MessHub Team' }],
+  creator: 'MessHub Team',
+  publisher: 'MessHub',
   robots: 'index, follow',
-  metadataBase: new URL('https://messmaster.vercel.app'),
+  metadataBase: new URL('https://MessHub.vercel.app'),
 };
 
 export const viewport: Viewport = {
@@ -56,7 +56,7 @@ export default function RootLayout({
         <meta name="background-color" content="#ffffff" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <meta name="apple-mobile-web-app-title" content="MessMaster" />
+        <meta name="apple-mobile-web-app-title" content="MessHub" />
         <link rel="mask-icon" href="/icon-512x512.png" color="#ffffff" />
       </head>
       <body className={inter.className}>

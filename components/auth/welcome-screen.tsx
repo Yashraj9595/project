@@ -56,8 +56,7 @@ export function WelcomeScreen({ onNavigate }: WelcomeScreenProps) {
 
               <div className="space-y-3">
                 <h1 className="text-4xl font-bold bg-gradient-to-r from-primary-blue to-dark-blue bg-clip-text text-transparent">
-                  MessMaster
-                </h1>
+                  MessHub                </h1>
                 <p className="text-muted-foreground font-medium text-base">Your Complete Mess Management Solution..</p>
 
                 <div className="flex items-center justify-center gap-4 text-sm">
@@ -115,8 +114,7 @@ export function WelcomeScreen({ onNavigate }: WelcomeScreenProps) {
                 className="w-full gradient-primary hover:shadow-lg text-white rounded-2xl py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-0"
               >
                 <Zap size={20} className="mr-2" />
-                Sign In to MessMaster
-              </Button>
+                Sign In to MessHub              </Button>
               <Button
                 onClick={() => onNavigate("register")}
                 variant="outline"
@@ -149,7 +147,7 @@ export function WelcomeScreen({ onNavigate }: WelcomeScreenProps) {
                 <InstallButton 
                   className="w-full text-sm py-2" 
                   variant="outline" 
-                  text="Install MessMaster App" 
+                  text="Install MessHub App" 
                 />
               </div>
             </div>
@@ -187,8 +185,7 @@ export function WelcomeScreen({ onNavigate }: WelcomeScreenProps) {
 
                 <div className="space-y-4">
                   <h1 className="text-7xl font-black bg-gradient-to-r from-primary-blue via-secondary-blue to-dark-blue bg-clip-text text-transparent leading-tight">
-                    MessMaster
-                  </h1>
+                    MessHub                  </h1>
                   <p className="text-2xl text-muted-foreground font-medium">Your Complete Mess Management Solution</p>
                 </div>
               </div>
@@ -300,8 +297,7 @@ export function WelcomeScreen({ onNavigate }: WelcomeScreenProps) {
                   className="w-full gradient-primary hover:shadow-2xl text-white rounded-2xl py-6 text-xl font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 border-0"
                 >
                   <Zap size={24} className="mr-3" />
-                  Sign In to MessMaster
-                </Button>
+                  Sign In to MessHub                </Button>
                 <Button
                   onClick={() => onNavigate("register")}
                   variant="outline"
@@ -332,7 +328,7 @@ export function WelcomeScreen({ onNavigate }: WelcomeScreenProps) {
                 <InstallButton 
                   className="w-full py-3" 
                   variant="outline" 
-                  text="Install MessMaster App" 
+                  text="Install MessHub App" 
                 />
               </div>
             </div>

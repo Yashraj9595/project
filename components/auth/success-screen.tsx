@@ -43,7 +43,7 @@ export function SuccessScreen({ onNavigate, authState }: SuccessScreenProps) {
     if (authState.resetFlow) {
       return "Your password has been updated. You can now sign in with your new password."
     }
-    return "Welcome to MessMaster! Your account has been created and you're ready to start your culinary journey."
+    return "Welcome to MessHub! Your account has been created and you're ready to start your culinary journey."
   }
 
   return (
@@ -102,7 +102,7 @@ export function SuccessScreen({ onNavigate, authState }: SuccessScreenProps) {
           <Card className="bg-card/95 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border-0 max-w-md mx-auto animate-slide-up">
             <div className="space-y-8">
               <div className="text-center space-y-4">
-                <h2 className="text-2xl font-bold text-foreground">Welcome to MessMaster!</h2>
+                <h2 className="text-2xl font-bold text-foreground">Welcome to MessHub!</h2>
                 <p className="text-muted-foreground text-base leading-relaxed">{getSuccessDescription()}</p>
               </div>
 
@@ -292,7 +292,7 @@ export function SuccessScreen({ onNavigate, authState }: SuccessScreenProps) {
                 <div className="w-32 h-32 bg-gradient-to-br from-green-500 to-green-600 rounded-4xl flex items-center justify-center mx-auto shadow-lg animate-pulse-glow">
                   <CheckCircle className="text-white" size={64} />
                 </div>
-                <h2 className="text-4xl font-bold text-foreground">Welcome to MessMaster!</h2>
+                <h2 className="text-4xl font-bold text-foreground">Welcome to MessHub!</h2>
                 <p className="text-xl text-muted-foreground leading-relaxed">{getSuccessDescription()}</p>
               </div>
 

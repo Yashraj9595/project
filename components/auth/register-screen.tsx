@@ -492,10 +492,10 @@ export function RegisterScreen({ onNavigate }: RegisterScreenProps) {
           <div className="relative z-10 px-6 pb-8">
             <div className="inline-flex items-center gap-3 glass px-4 py-2 rounded-full mb-4 backdrop-blur-sm">
               <ChefHat size={18} className="text-white" />
-              <span className="text-sm font-bold text-white tracking-wide">MESSMASTER PLATFORM</span>
+              <span className="text-sm font-bold text-white tracking-wide">MessHub PLATFORM</span>
               <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
             </div>
-            <h1 className="text-white text-4xl font-black mb-2 drop-shadow-lg">Join MessMaster</h1>
+            <h1 className="text-white text-4xl font-black mb-2 drop-shadow-lg">Join MessHub</h1>
             <p className="text-white/90 text-lg font-medium">
               {step === 1 ? "Choose your professional journey" : "Complete your profile setup"}
             </p>
@@ -549,8 +549,7 @@ export function RegisterScreen({ onNavigate }: RegisterScreenProps) {
                 </div>
                 <div>
                   <h1 className="text-6xl font-black bg-gradient-to-r from-primary-blue to-dark-blue bg-clip-text text-transparent">
-                    Join MessMaster
-                  </h1>
+                    Join MessHub                  </h1>
                   <p className="text-2xl text-muted-foreground font-medium mt-2">
                     {step === 1 ? "Choose your professional journey" : "Complete your profile setup"}
                   </p>

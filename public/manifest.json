@@ -1,7 +1,7 @@
 {
-  "name": "MessMaster - Kitchen Management Platform",
-  "short_name": "MessMaster",
-  "description": "Efficiently manage your mess/kitchen operations with MessMaster - Your complete kitchen management solution",
+  "name": "MessHub - Kitchen Management Platform",
+  "short_name": "MessHub",
+  "description": "Efficiently manage your mess/kitchen operations with MessHub - Your complete kitchen management solution",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -64,14 +64,14 @@
     {
       "name": "Sign In",
       "short_name": "Sign In",
-      "description": "Sign in to your MessMaster account",
+      "description": "Sign in to your MessHub account",
       "url": "/?screen=login",
       "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Register",
       "short_name": "Register",
-      "description": "Create a new MessMaster account",
+      "description": "Create a new MessHub account",
       "url": "/?screen=register",
       "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     },
@@ -89,21 +89,21 @@
       "sizes": "1170x2532",
       "type": "image/png",
       "platform": "narrow",
-      "label": "Welcome Screen on MessMaster"
+      "label": "Welcome Screen on MessHub"
     },
     {
       "src": "/screenshots/mobile-login.png",
       "sizes": "1170x2532",
       "type": "image/png",
       "platform": "narrow",
-      "label": "Sign In Screen on MessMaster"
+      "label": "Sign In Screen on MessHub"
     },
     {
       "src": "/screenshots/mobile-dashboard.png",
       "sizes": "1170x2532",
       "type": "image/png",
       "platform": "narrow",
-      "label": "Kitchen Dashboard on MessMaster"
+      "label": "Kitchen Dashboard on MessHub"
     }
   ],
   "categories": [

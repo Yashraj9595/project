@@ -41,7 +41,7 @@ export function InstallButton({
       if (success) {
         toast({
           title: "Installation Started",
-          description: "Follow the prompts to install MessMaster",
+          description: "Follow the prompts to install MessHub",
         })
       } else {
         toast({

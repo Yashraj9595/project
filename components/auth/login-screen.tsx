@@ -99,7 +99,7 @@ export function LoginScreen({ onNavigate }: LoginScreenProps) {
             <div className="relative z-10 px-6 pb-8">
               <div className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-4">
                 <ChefHat size={16} className="text-white" />
-                <span className="text-sm font-medium text-white">MessMaster Platform</span>
+                <span className="text-sm font-medium text-white">MessHub Platform</span>
                 <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
               </div>
               <h1 className="text-white text-4xl font-bold mb-2 drop-shadow-lg">Welcome Back</h1>
@@ -308,7 +308,7 @@ export function LoginScreen({ onNavigate }: LoginScreenProps) {
 
             {/* Desktop Features */}
             <div className="space-y-6">
-              <h2 className="text-3xl font-bold text-foreground">Why Choose MessMaster?</h2>
+              <h2 className="text-3xl font-bold text-foreground">Why Choose MessHub?</h2>
               <div className="space-y-4">
                 <div className="flex items-center gap-4 p-4 bg-card/50 rounded-2xl border border-border/50">
                   <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
@@ -343,7 +343,7 @@ export function LoginScreen({ onNavigate }: LoginScreenProps) {
             <div className="space-y-8">
               <div className="text-center space-y-4">
                 <h2 className="text-4xl font-bold text-foreground">Sign In</h2>
-                <p className="text-xl text-muted-foreground">Access your MessMaster account</p>
+                <p className="text-xl text-muted-foreground">Access your MessHub account</p>
               </div>
 
               <div className="space-y-6">
@@ -442,8 +442,7 @@ export function LoginScreen({ onNavigate }: LoginScreenProps) {
                   ) : (
                     <div className="flex items-center gap-3">
                       <Zap size={24} />
-                      Sign In to MessMaster
-                    </div>
+                      Sign In to MessHub                    </div>
                   )}
                 </Button>
 
